@@ -1,4 +1,28 @@
+import { Metadata } from "next";
 import Image from "next/image";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const fcMetadata: Record<string, string> = {
+    'fc:frame': 'vNext',
+    'fc:frame:post_url': `${process.env.HOST_URL}/frame`,
+    'fc:frame:image': `${process.env.GATEWAY_URL}/ipfs/QmYy5rCLph8HCgQs25V6PwhTqbMNRYTjEJag7cJrc3dMTf`,
+    'fc:frame:button:1': 'Begin',
+  };
+
+  return {
+    title: 'Dot Frame',
+    openGraph: {
+      title: 'Dot Frame',
+      images: [
+        `${process.env.GATEWAY_URL}/ipfs/QmYy5rCLph8HCgQs25V6PwhTqbMNRYTjEJag7cJrc3dMTf`,
+      ],
+    },
+    other: {
+      ...fcMetadata,
+    },
+    metadataBase: new URL(`${process.env.HOST_URL}`),
+  };
+}
 
 export default function Home() {
   return (
