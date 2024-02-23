@@ -4,7 +4,7 @@ import { baseSepolia } from "viem/chains";
 import contractAbi from "./contract.json";
 const contractAddress = process.env.CONTRACT_ADDRESS as `0x`;
 
-const account = privateKeyToAccount((process.env.PRIVATE_KEY as `0x`) || "");
+const account = privateKeyToAccount(`0x${process.env.PRIVATE_KEY}` || "");
 
 export const publicClient = createPublicClient({
   chain: baseSepolia,
@@ -40,10 +40,10 @@ export async function balanceOf(address: string) {
       address: contractAddress,
       abi: contractAbi,
       functionName: "balanceOf",
-      args: [address as `0x`, 0]
+      args: [address as `0x`, 0],
     });
-    const balance: number = Number(balanceData)
-    return balance
+    const balance: number = Number(balanceData);
+    return balance;
   } catch (error) {
     console.log(error);
     return error;
