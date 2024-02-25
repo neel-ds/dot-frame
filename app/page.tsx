@@ -5,12 +5,11 @@ const Home = () => {
     <FrameMetadata
       buttons={[
         {
-          label: "Get your NFT",
-          action: "post",
+          label: "Mint",
         },
       ]}
       image={{
-        src: `${process.env.HOST_URL}/collectible.jpeg`,
+        src: `${process.env.HOST_URL}/elemental.png`,
         aspectRatio: "1:1",
       }}
       postUrl={`${process.env.HOST_URL}/mint`}

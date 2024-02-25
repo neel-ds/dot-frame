@@ -5,6 +5,7 @@ import contractAbi from "./contract.json";
 const contractAddress = process.env.CONTRACT_ADDRESS as `0x`;
 
 const account = privateKeyToAccount(`0x${process.env.PRIVATE_KEY}` || "");
+const uri = process.env.BASE_URI;
 
 export const publicClient = createPublicClient({
   chain: baseSepolia,
@@ -24,27 +25,10 @@ export async function mintNft(toAddress: string) {
       address: contractAddress,
       abi: contractAbi,
       functionName: "safeMint",
-      args: [toAddress, 2],
+      args: [toAddress, uri],
     });
     const transaction = await walletClient.writeContract(request);
-    console.log("🚀 ~ mintNft ~ transaction:", transaction)
     return transaction;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-}
-
-export async function balanceOf(address: string) {
-  try {
-    const balanceData = await publicClient.readContract({
-      address: contractAddress,
-      abi: contractAbi,
-      functionName: "balanceOf",
-      args: [address as `0x`, 0],
-    });
-    const balance: number = Number(balanceData);
-    return balance;
   } catch (error) {
     console.log(error);
     return error;
