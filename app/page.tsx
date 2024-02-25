@@ -1,21 +1,21 @@
-'use server';
 import { FrameMetadata } from "@coinbase/onchainkit";
 
-const HOST_URL = process.env.HOST_URL;
-
-export default async function Home() {
+const Home = () => {
   return (
     <FrameMetadata
       buttons={[
         {
-          label: "Get Started",
+          label: "Get your NFT",
+          action: "post",
         },
       ]}
       image={{
-        src: `${HOST_URL}/collectible.jpeg`,
+        src: `${process.env.HOST_URL}/collectible.jpeg`,
         aspectRatio: "1:1",
       }}
-      postUrl={`${HOST_URL}/mint`}
+      postUrl={`${process.env.HOST_URL}/mint`}
     />
   );
-}
+};
+
+export default Home;
